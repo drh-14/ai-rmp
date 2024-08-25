@@ -18,7 +18,6 @@ export default function Home() {
     setMessages(prevList => [...prevList, {speaker: 'AI', message: AIMessage} ] )
     console.log(userMessage);
     setUserMessage('');
-
   };
   return (
     <main>
@@ -27,11 +26,11 @@ export default function Home() {
         <div className = 'flex flex-col gap-2 mt-4 ml-2 mr-2'>
         {messages.map((msg, index) => 
         msg.speaker === 'AI' ?(
-        <div className ='bg-blue-500 p-4 rounded-md max-w-max break-words'>
+        <div key = {index} className ='bg-blue-500 p-4 rounded-md max-w-max break-words'>
           {loading && index  != 0 && index === messages.length - 1? <ThreeDots height = '10' width = '30' color = 'white'></ThreeDots>:
            msg.message}
         </div>): 
-        (<div className = 'bg-green-500 ml-auto p-4 rounded-md max-w-max break-words'>{msg.message}</div>))}
+        (<div key = {index} className = 'bg-green-500 ml-auto p-4 rounded-md max-w-max break-words'>{msg.message}</div>))}
         </div>
         </Box>
         <div className = 'flex gap-2 w-1/2 mb-4'>
