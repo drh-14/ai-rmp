@@ -2,26 +2,18 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, 
+  apiKey: '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', 
 });
-
-const systemPrompt: string = 'You are a chatbot assisting students from Stony Brook University find research opportunities. Please mainly focus on providing ample information about the research question that they are inquiring about and provide suggestions for adjacent information that they may be interested in; for example, if they ask about a math professor that does research in a certain field, mention other professors that do research in the same field. Also, change the language you respond in based on the language that the user speaks in.';
-
+const systemPrompt: string = 'You are a chatbot assisting students from Stony Brook University with RateMyProfessor reviews of professors at Stony Brook. Also, change the language you respond in based on the language that the user speaks in.';
 export async function POST(req: Request) {
   try {
     const data = await req.json();
     const messages = data.messages;
-
-    if (!Array.isArray(messages)) {
-      return NextResponse.json({ error: 'Invalid message format' }, { status: 400 });
-    }
-
     const completion = await openai.chat.completions.create({
       model: 'gpt-4',
       messages: [{ role: 'system', content: systemPrompt }, ...messages],
       stream: true,
     });
-
     const stream = new ReadableStream<Uint8Array>({
       async start(controller) {
         const encoder = new TextEncoder();
@@ -42,7 +34,6 @@ export async function POST(req: Request) {
         }
       },
     });
-
     return new NextResponse(stream);
   } catch (error) {
     console.error('Error in OpenAI API request:', error);
