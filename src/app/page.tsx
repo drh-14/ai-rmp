@@ -2,7 +2,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useState, useEffect, useRef } from 'react';
-import { FallingLines, ThreeDots } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 export default function Home() {
   const [messages, setMessages] = useState([
     {
