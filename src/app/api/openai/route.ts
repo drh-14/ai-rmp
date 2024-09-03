@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: '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', 
+  apiKey: process.env.OPENAI_KEY, 
 });
 const systemPrompt: string = 'You are a chatbot assisting students from Stony Brook University with RateMyProfessor reviews of professors at Stony Brook. Also, change the language you respond in based on the language that the user speaks in.';
 export async function POST(req: Request) {
